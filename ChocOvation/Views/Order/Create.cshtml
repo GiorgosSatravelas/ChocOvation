@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ChocOvation.ViewModels.OrderFormViewModel>
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Your Order!</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container ">
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="container ">
+            <div class="row  items">
+                <div class="item col-sm-4">
+                    <h4>Material Name</h4>
+                </div>
+                <div class="item col-sm-4">
+                    <h4>Quantity</h4>
+                </div>
+                <div class="item col-sm-2"></div>
+
+                @{  foreach(var item in Model)
+                    {
+                        <div class="item col-sm-4" , name="MaterialName">                          
+                            @Html.TextBoxFor(m => item.MaterialName, new { @readonly = "readonly", @class = "form-control", autofocus = "autofocus" })                            
+                        </div>
+                        
+                        <div class="item col-sm-4">
+                            <div class="input type=" text" name="QuantityPerYear" col-sm-3 col-md-4">
+                                @Html.TextBoxFor(m => item.QuantityPerYear, new { @class = "form-control", autofocus = "autofocus" }) 
+                                @Html.ValidationMessageFor(m => item.QuantityPerYear, String.Empty, new { @class = "text-danger" })
+                            </div>                            
+                        </div>
+                        <div class="item col-sm-2">gr</div>
+
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="col-md-offset-2 col-md-6">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+
+        <div class="col-md-offset-2 col-md-6">
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+                    }
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
